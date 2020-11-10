@@ -6,8 +6,8 @@ import {
 
 function Home () {
   return (
-      <View style={styles.parent}>
-         <ScrollView>
+      <ScrollView style={styles.parent}>
+         {/* <ScrollView> */}
             <TouchableOpacity style={styles.cardNews}>
                <View style={styles.viewNews}>
                   <View style={styles.viewTextNews}>
@@ -239,21 +239,21 @@ function Home () {
                   </View>
                </View>
             </TouchableOpacity>
-         </ScrollView>
-      </View>
+         {/* </ScrollView> */}
+      </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
   parent: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    //  justifyContent: 'center',
+    //  alignItems: 'center',
     padding: 15
     //  backgroundColor: 'black'
   },
   viewImg: {
-    flex: 1,
+    flex: 3,
     padding: 5
   },
   imgNews: {
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
   cardNews: {
     borderWidth: 1,
     borderColor: 'gray',
-    width: 355,
+    //  width: 355,
     height: 100,
     borderRadius: 10,
     marginVertical: 10
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   viewTextNews: {
-    width: 230,
+    flex: 5,
     height: 100,
     padding: 5
     //  borderWidth: 1
