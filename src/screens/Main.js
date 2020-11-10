@@ -21,7 +21,7 @@ function Main () {
              component={Home}
              options={{
                title: 'Home',
-               headerRight: () => <HeaderHome />
+               headerRight: () => { <HeaderHome /> }
              }}
          />
              <Draw.Screen
