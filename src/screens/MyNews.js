@@ -5,15 +5,15 @@ import {
 } from 'react-native'
 
 // import actions
-import actionsHome from '../redux/actions/home'
+// import actionsHome from '../redux/actions/home'
 
 // import moment
-import momet from 'moment'
+// import momet from 'moment'
 
 // import redux
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
 
-class Home extends React.Component {
+class MyNews extends React.Component {
 //   constructor (props) {
 //     super(props)
 //     this.state = {
@@ -36,7 +36,10 @@ class Home extends React.Component {
                <TouchableOpacity style={styles.cardNews} onPress={() => this.props.navigation.navigate('Detail') }>
                   <View style={styles.viewNews}>
                      <View style={styles.viewTextNews}>
-                        <Text style={styles.titleNews}>JUDUL INI BRITA</Text>
+                        <Text style={styles.titleNews}>Warga Seleman Dituding Mencuri Rokok dan Digepuki Warga Hingga Babak Belur Bobrok PolPolannn</Text>
+                        {/* <Text style={styles.subtitle}>
+                           Jdwndawdawuhdawuidaw daiudhawudhaw daiuwudhauwdh dadhadha ||dwadhauidhuiadhwuidhuiawh alala
+                        </Text> */}
                         <View style={styles.viewCreateAndDate}>
                            <View>
                               <Text style={styles.createdBy}>
@@ -55,6 +58,14 @@ class Home extends React.Component {
                      </View>
                      <View style={styles.viewImg}>
                         <Image source={{ uri: 'https://reactjs.org/logo-og.png' }} style={styles.imgNews} />
+                        <View style={styles.actions}>
+                           <TouchableOpacity>
+                              <Text style={styles.actionsEdit}>Edit</Text>
+                           </TouchableOpacity>
+                           <TouchableOpacity>
+                              <Text style={styles.actionsDelete}>Delete</Text>
+                           </TouchableOpacity>
+                        </View>
                      </View>
                   </View>
                </TouchableOpacity>
@@ -62,7 +73,10 @@ class Home extends React.Component {
                <TouchableOpacity style={styles.cardNews} onPress={() => this.props.navigation.navigate('Detail') }>
                   <View style={styles.viewNews}>
                      <View style={styles.viewTextNews}>
-                        <Text style={styles.titleNews}>JUDUL INI BRITA</Text>
+                        <Text style={styles.titleNews}>Warga Seleman Dituding Mencuri Rokok dan Digepuki Warga Hingga Babak Belur Bobrok PolPolannn</Text>
+                        {/* <Text style={styles.subtitle}>
+                           Jdwndawdawuhdawuidaw daiudhawudhaw daiuwudhauwdh dadhadha ||dwadhauidhuiadhwuidhuiawh alala
+                        </Text> */}
                         <View style={styles.viewCreateAndDate}>
                            <View>
                               <Text style={styles.createdBy}>
@@ -81,6 +95,14 @@ class Home extends React.Component {
                      </View>
                      <View style={styles.viewImg}>
                         <Image source={{ uri: 'https://reactjs.org/logo-og.png' }} style={styles.imgNews} />
+                        <View style={styles.actions}>
+                           <TouchableOpacity>
+                              <Text style={styles.actionsEdit}>Edit</Text>
+                           </TouchableOpacity>
+                           <TouchableOpacity>
+                              <Text style={styles.actionsDelete}>Delete</Text>
+                           </TouchableOpacity>
+                        </View>
                      </View>
                   </View>
                </TouchableOpacity>
@@ -88,15 +110,18 @@ class Home extends React.Component {
                <TouchableOpacity style={styles.cardNews} onPress={() => this.props.navigation.navigate('Detail') }>
                   <View style={styles.viewNews}>
                      <View style={styles.viewTextNews}>
-                        <Text style={styles.titleNews}>JUDUL INI BRITA</Text>
+                        <Text style={styles.titleNews}>Warga Seleman Dituding Mencuri Rokok dan Digepuki Warga Hingga Babak Belur Bobrok PolPolannn</Text>
+                        {/* <Text style={styles.subtitle}>
+                           Jdwndawdawuhdawuidaw daiudhawudhaw daiuwudhauwdh dadhadha ||dwadhauidhuiadhwuidhuiawh alala
+                        </Text> */}
                         <View style={styles.viewCreateAndDate}>
                            <View>
                               <Text style={styles.createdBy}>
                                  Wahyu Ramadan
                               </Text>
                            </View>
-                              <Text style={styles.dot}> . </Text>
                            <View>
+                              <Text style={styles.dot}> . </Text>
                            </View>
                            <View>
                               <Text style={styles.dateCreate}>
@@ -107,6 +132,14 @@ class Home extends React.Component {
                      </View>
                      <View style={styles.viewImg}>
                         <Image source={{ uri: 'https://reactjs.org/logo-og.png' }} style={styles.imgNews} />
+                        <View style={styles.actions}>
+                           <TouchableOpacity>
+                              <Text style={styles.actionsEdit}>Edit</Text>
+                           </TouchableOpacity>
+                           <TouchableOpacity>
+                              <Text style={styles.actionsDelete}>Delete</Text>
+                           </TouchableOpacity>
+                        </View>
                      </View>
                   </View>
                </TouchableOpacity>
@@ -114,7 +147,10 @@ class Home extends React.Component {
                <TouchableOpacity style={styles.cardNews} onPress={() => this.props.navigation.navigate('Detail') }>
                   <View style={styles.viewNews}>
                      <View style={styles.viewTextNews}>
-                        <Text style={styles.titleNews}>JUDUL INI BRITA</Text>
+                        <Text style={styles.titleNews}>Warga Seleman Dituding Mencuri Rokok dan Digepuki Warga Hingga Babak Belur Bobrok PolPolannn</Text>
+                        {/* <Text style={styles.subtitle}>
+                           Jdwndawdawuhdawuidaw daiudhawudhaw daiuwudhauwdh dadhadha ||dwadhauidhuiadhwuidhuiawh alala
+                        </Text> */}
                         <View style={styles.viewCreateAndDate}>
                            <View>
                               <Text style={styles.createdBy}>
@@ -133,6 +169,14 @@ class Home extends React.Component {
                      </View>
                      <View style={styles.viewImg}>
                         <Image source={{ uri: 'https://reactjs.org/logo-og.png' }} style={styles.imgNews} />
+                        <View style={styles.actions}>
+                           <TouchableOpacity>
+                              <Text style={styles.actionsEdit}>Edit</Text>
+                           </TouchableOpacity>
+                           <TouchableOpacity>
+                              <Text style={styles.actionsDelete}>Delete</Text>
+                           </TouchableOpacity>
+                        </View>
                      </View>
                   </View>
                </TouchableOpacity>
@@ -140,7 +184,10 @@ class Home extends React.Component {
                <TouchableOpacity style={styles.cardNews} onPress={() => this.props.navigation.navigate('Detail') }>
                   <View style={styles.viewNews}>
                      <View style={styles.viewTextNews}>
-                        <Text style={styles.titleNews}>JUDUL INI BRITA</Text>
+                        <Text style={styles.titleNews}>Warga Seleman Dituding Mencuri Rokok dan Digepuki Warga Hingga Babak Belur Bobrok PolPolannn</Text>
+                        {/* <Text style={styles.subtitle}>
+                           Jdwndawdawuhdawuidaw daiudhawudhaw daiuwudhauwdh dadhadha ||dwadhauidhuiadhwuidhuiawh alala
+                        </Text> */}
                         <View style={styles.viewCreateAndDate}>
                            <View>
                               <Text style={styles.createdBy}>
@@ -159,6 +206,14 @@ class Home extends React.Component {
                      </View>
                      <View style={styles.viewImg}>
                         <Image source={{ uri: 'https://reactjs.org/logo-og.png' }} style={styles.imgNews} />
+                        <View style={styles.actions}>
+                           <TouchableOpacity>
+                              <Text style={styles.actionsEdit}>Edit</Text>
+                           </TouchableOpacity>
+                           <TouchableOpacity>
+                              <Text style={styles.actionsDelete}>Delete</Text>
+                           </TouchableOpacity>
+                        </View>
                      </View>
                   </View>
                </TouchableOpacity>
@@ -166,7 +221,10 @@ class Home extends React.Component {
                <TouchableOpacity style={styles.cardNews} onPress={() => this.props.navigation.navigate('Detail') }>
                   <View style={styles.viewNews}>
                      <View style={styles.viewTextNews}>
-                        <Text style={styles.titleNews}>JUDUL INI BRITA</Text>
+                        <Text style={styles.titleNews}>Warga Seleman Dituding Mencuri Rokok dan Digepuki Warga Hingga Babak Belur Bobrok PolPolannn</Text>
+                        {/* <Text style={styles.subtitle}>
+                           Jdwndawdawuhdawuidaw daiudhawudhaw daiuwudhauwdh dadhadha ||dwadhauidhuiadhwuidhuiawh alala
+                        </Text> */}
                         <View style={styles.viewCreateAndDate}>
                            <View>
                               <Text style={styles.createdBy}>
@@ -185,9 +243,18 @@ class Home extends React.Component {
                      </View>
                      <View style={styles.viewImg}>
                         <Image source={{ uri: 'https://reactjs.org/logo-og.png' }} style={styles.imgNews} />
+                        <View style={styles.actions}>
+                           <TouchableOpacity>
+                              <Text style={styles.actionsEdit}>Edit</Text>
+                           </TouchableOpacity>
+                           <TouchableOpacity>
+                              <Text style={styles.actionsDelete}>Delete</Text>
+                           </TouchableOpacity>
+                        </View>
                      </View>
                   </View>
                </TouchableOpacity>
+
             {/* ))} */}
 
          {/* </ScrollView> */}
@@ -210,7 +277,7 @@ const styles = StyleSheet.create({
     //  borderWidth: 1
   },
   imgNews: {
-    height: 120,
+    height: 110,
     borderRadius: 10,
     resizeMode: 'cover'
   },
@@ -227,10 +294,12 @@ const styles = StyleSheet.create({
   },
   viewNews: {
     flexDirection: 'row'
+    //  borderWidth: 1,
+    //  flex: 1
   },
   viewTextNews: {
     flex: 5,
-    height: 140,
+    height: 150,
     padding: 5
     //  borderWidth: 1
   },
@@ -239,13 +308,23 @@ const styles = StyleSheet.create({
     //  fontWeight: 'bold',
     fontSize: 20,
     color: 'black',
+    //  fontStyle: 'italic',
     fontFamily: 'times news roman'
     //  borderWidth: 1
   },
+  //   subtitle: {
+  //     //  borderWidth: 1,
+  //     height: 54,
+  //     fontFamily: 'times news roman',
+  //     //  color: 'grey',
+  //     fontSize: 14
+  //   },
   viewCreateAndDate: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-end'
+    //  borderWidth: 1
+
     // justifyContent: 'space-between'
   },
   createdBy: {
@@ -256,6 +335,24 @@ const styles = StyleSheet.create({
   },
   dateCreate: {
     color: 'gray'
+  },
+  actions: {
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'space-between',
+    //  marginVertical: 10,
+    alignItems: 'flex-end'
+    //  borderWidth: 1
+  },
+  actionsEdit: {
+    color: '#778899',
+    fontSize: 15,
+    fontStyle: 'italic'
+  },
+  actionsDelete: {
+    color: 'red',
+    fontSize: 15,
+    fontStyle: 'italic'
   }
 })
 
@@ -267,4 +364,4 @@ const styles = StyleSheet.create({
 //   getNews: actionsHome.getNews
 // }
 
-export default Home
+export default MyNews

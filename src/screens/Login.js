@@ -1,33 +1,90 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, TextInput, ScrollView, Alert } from 'react-native'
+import { Form } from 'native-base'
 
-const Login = ({ navigation }) => {
-  return (
+// import action
+import loginActions from '../redux/actions/auth'
+
+// import connect
+import { connect } from 'react-redux'
+
+class Login extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      email: '',
+      password: '',
+      alertMsg: ''
+    }
+  }
+
+  // componentDidMount () {
+  //   console.log('login',this.props.auth)
+  // }
+
+  // doLogin = (e) => {
+  //   e.preventDefault()
+  //   const {email, password} = this.state
+  //   const data = {
+  //     email, password
+  //   }
+  //   if (email === '') {
+  //     Alert.alert('Email wrong')
+  //   } else if (password === '') {
+  //     Alert.alert('Password wrong')
+  //   } else {
+  //     this.props.goLogin(data)
+  //   }
+
+  // }
+
+  // showAlert= () => {
+  //   const {alertMsg} = this.props.auth
+  //   if (alertMsg !== this.state.alertMsg) {
+  //     this.setState({alertMsg})
+  //     Alert.alert(alertMsg)
+  //     // console.log('alert')
+  //   }
+  // }
+
+  // componentDidUpdate() {
+  //   this.showAlert()
+  // }
+
+  render () {
+    return (
       <ScrollView style={styles.parent}>
          {/* <ScrollView> */}
             <Text style={styles.header}>LOGIN</Text>
             <View style={styles.viewGroupInput}>
+              <Form>
                <View style={styles.viewInput}>
                   <Text style={styles.label}>Email</Text>
                   <TextInput placeholder='Email' />
+                  {/* onChangeText={email => this.setState({ email })} */}
                </View>
 
                <View style={styles.viewInput}>
                   <Text style={styles.label}>Password</Text>
                   <TextInput placeholder='Password' secureTextEntry />
+                  {/* onChangeText={password => this.setState({ password })} */}
                </View>
 
-               <TouchableOpacity style={styles.link} onPress={() => navigation.navigate('Register')}>
+               <TouchableOpacity style={styles.link} >
+               {/* onPress={() => this.props.navigation.navigate('Register')} */}
                   <Text style={styles.textLink}>Forgot your password ?</Text>
                </TouchableOpacity>
 
-               <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Home')}>
+               <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('Home')}>
+               {/* onPress={this.doLogin} */}
                   <Text style={styles.textBtn}>LOGIN</Text>
                </TouchableOpacity>
+               </Form>
             </View>
          {/* </ScrollView> */}
       </ScrollView>
-  )
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -46,8 +103,10 @@ const styles = StyleSheet.create({
   },
   viewInput: {
     height: 75,
-    elevation: 1,
+    // elevation: 1,
     //  borderWidth: 1,
+    borderBottomWidth: 1,
+    borderBottomColor: 'grey',
     borderRadius: 3,
     padding: 5,
     justifyContent: 'center',
@@ -78,5 +137,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   }
 })
+
+// const mapStateToProps = state => ({
+//   auth: state.auth
+// })
+
+// const mapDispatchToProps = {
+//   goLogin: loginActions.login
+// }
 
 export default Login

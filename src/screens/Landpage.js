@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
     width: 300,
     alignSelf: 'center',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginTop: 50
     //  borderWidth: 1
   },
   viewLogo: {

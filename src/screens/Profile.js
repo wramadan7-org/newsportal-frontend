@@ -4,9 +4,23 @@ import {
   ScrollView, Image, StyleSheet
 } from 'react-native'
 // import { Header, Item } from 'native-base'
+import profileActions from '../redux/actions/personal'
+import { connect } from 'react-redux'
 
-const Profile = () => {
-  return (
+class Profile extends React.Component {
+  // componentDidMount () {
+  //   console.log('state', this.props.personal)
+  //   this.props.getPersonal(this.props.auth.token)
+  // }
+
+  componentDidUpdate () {
+    // this.props.getPersonal(this.props.auth.token)
+  }
+
+  render () {
+    // console.log(this.props.personal)
+    // const { isLoading, isError, data, alertMsg } = this.props.personal
+    return (
       <ScrollView style={styles.parent}>
          {/* <Header searchBar rounded>
             <Item>
@@ -15,33 +29,36 @@ const Profile = () => {
                </TouchableOpacity>
             </Item>
          </Header> */}
+        {/* {!isLoading && !isError && data && data.map(o => ( */}
          <View style={styles.body}>
-            <View style={styles.viewPhoto}>
-               <Image style={styles.photoProfile} source={{ uri: 'https://reactjs.org/logo-og.png' }} />
-               <View>
-                  <Text style={styles.textNameProfile}>Wahyu Ramadan</Text>
-               </View>
-            </View>
-            <View style={styles.viewDesc}>
-               <View style={styles.descTop}>
-                  <View style={styles.viewName}>
-                     <Text style={styles.title}>Name</Text>
-                     <Text style={styles.desc}>Wahyu Ramadan</Text>
-                  </View>
+              <View style={styles.viewPhoto}>
+                <Image style={styles.photoProfile} source={{ uri: 'https://reactjs.org/logo-og.png' }} />
+                <View>
+                    <Text style={styles.textNameProfile}>Wahyu Ramadan</Text>
+                </View>
+              </View>
+              <View style={styles.viewDesc}>
+                <View style={styles.descTop}>
+                    <View style={styles.viewName}>
+                      <Text style={styles.title}>Name</Text>
+                      <Text style={styles.desc}>Wahyu Ramadan</Text>
+                    </View>
 
-                  <View style={styles.viewDate}>
-                     <Text style={styles.title}>Date</Text>
-                     <Text style={styles.desc}>2000-12-12</Text>
-                  </View>
-               </View>
-               <View style={styles.viewEmail}>
-                  <Text style={styles.title}>Email</Text>
-                  <Text style={styles.desc}>wramadan1203@gmail.com</Text>
-               </View>
-            </View>
+                    <View style={styles.viewDate}>
+                      <Text style={styles.title}>Date</Text>
+                      <Text style={styles.desc}>2000-12-12</Text>
+                    </View>
+                </View>
+                <View style={styles.viewEmail}>
+                    <Text style={styles.title}>Email</Text>
+                    <Text style={styles.desc}>wramadan1203@gmail</Text>
+                </View>
+              </View>
          </View>
+        {/* ))} */}
       </ScrollView>
-  )
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -114,5 +131,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 })
+
+// const mapStateToProps = state => ({
+//   auth: state.auth,
+//   personal: state.personal
+// })
+
+// const mapDispatchToProps = {
+//   getPersonal: profileActions.getPersonal
+// }
 
 export default Profile

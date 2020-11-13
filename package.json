@@ -15,10 +15,17 @@
     "@react-navigation/drawer": "^5.11.1",
     "@react-navigation/native": "^5.8.8",
     "@react-navigation/stack": "^5.12.5",
+    "axios": "^0.21.0",
+    "dotenv": "^8.2.0",
+    "moment": "^2.29.1",
     "native-base": "^2.13.14",
+    "querystring": "^0.2.0",
     "react": "16.13.1",
     "react-native": "0.63.3",
+    "react-native-dotenv": "^2.4.2",
     "react-native-gesture-handler": "^1.8.0",
+    "react-native-image-picker": "^2.3.4",
+    "react-native-push-notification": "^6.1.3",
     "react-native-reanimated": "^1.13.1",
     "react-native-safe-area-context": "^3.1.8",
     "react-native-screens": "^2.13.0",
@@ -26,7 +33,8 @@
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
-    "redux-promise-middleware": "^6.1.2"
+    "redux-promise-middleware": "^6.1.2",
+    "rn-fetch-blob": "^0.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
