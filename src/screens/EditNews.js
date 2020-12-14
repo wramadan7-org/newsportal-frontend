@@ -13,13 +13,14 @@ const options = {
   chooseFromLibraryButtonTitle: 'Choose photo from library'
 }
 
-class CreateNews extends Component {
+class EditNews extends Component {
 
   constructor(props) {
     super(props)
     this.state ={
-      avatar: null,
-      pic: null
+      title: '',
+      news: '',
+      avatar: null
     }
   }
 
@@ -70,8 +71,8 @@ class CreateNews extends Component {
 
   render () {
 
-    const sheetRef = React.createRef(null)
-    console.log(sheetRef)
+   //  const sheetRef = React.createRef(null)
+   //  console.log(sheetRef)
 
     return (
         <View style={styles.parent}>
@@ -85,13 +86,13 @@ class CreateNews extends Component {
               <Text>
                 Title
               </Text>
-              <TextInput style={styles.textTitle} />
+              <TextInput style={styles.textTitle} value={this.state.title} onChangeText={title => this.setState({title})} />
             </View>
             <View style={styles.viewTextArea}>
               <Text>
                 News
               </Text>
-              <TextInput multiline={true} style={styles.textArea} />
+              <TextInput multiline={true} style={styles.textArea} value={this.state.news} onChangeText={news => this.setState({news})} />
             </View>
             {this.state.avatar === null ? (
               <View />
@@ -103,8 +104,8 @@ class CreateNews extends Component {
             <TouchableOpacity onPress={this.takeFromLibrary} style={styles.viewChosePicture}>
               <Text style={styles.textChoose}>Choose picture</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btnCreate}>
-              <Text style={styles.textBtn}>CREATE</Text>
+            <TouchableOpacity style={styles.btnEdit}>
+              <Text style={styles.textBtn}>EDIT</Text>
             </TouchableOpacity>
             {/* <BottomSheet
               ref={sheetRef}
@@ -167,7 +168,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold'
   },
-  btnCreate: {
+  btnEdit: {
     height: 50,
     backgroundColor: 'grey',
     borderRadius: 100,
@@ -190,4 +191,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default CreateNews
+export default EditNews

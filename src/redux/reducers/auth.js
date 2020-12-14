@@ -3,16 +3,17 @@ const initialState = {
   isLoading: false,
   isError: false,
   token: '',
-  alertMsg: ''
-}
+  alertMsg: '',
+  success: false,
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'LOGIN_PENDING': {
       return {
         ...state,
-        isLoading: true
-      }
+        isLoading: true,
+      };
     }
     case 'LOGIN_REJECTED': {
       return {
@@ -20,8 +21,8 @@ export default (state = initialState, action) => {
         isLoading: false,
         isLogin: false,
         isError: true,
-        alertMsg: action.payload.data.message
-      }
+        alertMsg: action.payload.data.message,
+      };
     }
     case 'LOGIN_FULFILLED': {
       return {
@@ -30,11 +31,22 @@ export default (state = initialState, action) => {
         isLogin: true,
         isError: false,
         alertMsg: action.payload.data.message,
-        token: action.payload.data.results
-      }
+        token: action.payload.data.results,
+        success: action.payload.data.success,
+      };
+    }
+    case 'LOGOUT': {
+      return {
+        isLogin: false,
+        isLoading: false,
+        isError: false,
+        token: '',
+        alertMsg: '',
+        success: false,
+      };
     }
     default: {
-      return state
+      return state;
     }
   }
-}
+};

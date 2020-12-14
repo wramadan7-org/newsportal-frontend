@@ -1,25 +1,25 @@
 const initialState = {
   isLoading: false,
   isError: true,
-  isSuccess: false,
-  alertMsg: ''
-}
+  success: false,
+  alertMsg: '',
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'REGISTER_PENDING': {
       return {
         ...state,
-        isLoading: true
-      }
+        isLoading: true,
+      };
     }
     case 'REGISTER_REJECTED': {
       return {
         ...state,
         isLoading: false,
         isError: true,
-        alertMsg: action.payload.data.message
-      }
+        alertMsg: action.payload.data.message,
+      };
     }
     case 'REGISTER_FULFILLED': {
       return {
@@ -27,11 +27,11 @@ export default (state = initialState, action) => {
         isloading: false,
         isError: false,
         alertMsg: action.payload.data.message,
-        isSuccess: action.payload.data.success
-      }
+        success: action.payload.data.success,
+      };
     }
     default: {
-      return state
+      return state;
     }
   }
-}
+};

@@ -1,104 +1,139 @@
-import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, Alert } from 'react-native'
-import { Form } from 'native-base'
-import { connect } from 'react-redux'
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+  ScrollView,
+  Alert,
+} from 'react-native';
+import * as yup from 'yup';
+import {Formik} from 'formik';
+import {useDispatch} from 'react-redux';
 
 // import actions
-import registerActions from '../redux/actions/auth'
+import registerActions from '../redux/actions/auth';
 
-class Register extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      name: '',
-      email: '',
-      password: '',
-      alertMsg: ''
+const Register = ({navigation}) => {
+  const registerValidate = yup.object().shape({
+    name: yup.string().required('Name is required'),
+    email: yup
+      .string()
+      .email('Please enter valid email')
+      .required('Email is required'),
+    password: yup
+      .string()
+      .min(8, ({min}) => `Password must be at least ${min} characters`)
+      .required('Password is required'),
+  });
+
+  const dispatch = useDispatch();
+
+  const doRegister = async (values) => {
+    const dispatchRegister = await dispatch(registerActions.register(values));
+    if (dispatchRegister && dispatchRegister.action.payload.data.success) {
+      Alert.alert('Success', 'Register successfully', [
+        {
+          text: 'OK',
+          onPress: () => navigation.navigate('Login'),
+        },
+      ]);
+    } else {
+      Alert.alert('Fail', 'Email already registerd');
     }
-  }
+  };
 
-  // doRegister = (e) => {
-  //   e.preventDefault()
-  //   const { isSuccess,alertMsg} = this.props.registerState
-  //   const {name, email, password} = this.state
-  //   if (name === '' && email === '' && password === '') {
-  //     Alert.alert('Fill all column')
-  //   } else  {
-  //     const data = {
-  //       name, email, password
-  //     }
-  //     // console.log('wawawaww',alertMsg)
-  //     // console.log(isSuccess)
-  //     this.props.goRegister(data)
-  //   }
-  // }
+  return (
+    <ScrollView style={styles.parent}>
+      <Text style={styles.header}>REGISTER</Text>
+      <View style={styles.viewGroupInput}>
+        <Formik
+          validationSchema={registerValidate}
+          initialValues={{
+            name: '',
+            email: '',
+            password: '',
+          }}
+          onSubmit={(values) => doRegister(values)}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            isValid,
+            touched,
+          }) => (
+            <>
+              <View style={styles.viewInput}>
+                <Text style={styles.label}>Name</Text>
+                <TextInput
+                  placeholder="Name"
+                  onChangeText={handleChange('name')}
+                  onBlur={handleBlur('name')}
+                />
+              </View>
+              {errors.name && touched.name && (
+                <Text style={styles.errorText}>{errors.name}</Text>
+              )}
 
-  // showAlert= () => {
-  //   const {alertMsg} = this.props.registerState
-  //   if (alertMsg !== this.state.alertMsg) {
-  //     this.setState({alertMsg})
-  //     Alert.alert(alertMsg)
-  //     // console.log('alert')
-  //   }
-  // }
+              <View style={styles.viewInput}>
+                <Text style={styles.label}>Email</Text>
+                <TextInput
+                  placeholder="Email"
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  keyboardType="email-address"
+                />
+              </View>
+              {errors.email && touched.email && (
+                <Text style={styles.errorText}>{errors.email}</Text>
+              )}
 
-  // componentDidUpdate() {
-  //   // console.log(this.props.registerState)
-  //   this.showAlert()
-  // }
+              <View style={styles.viewInput}>
+                <Text style={styles.label}>Password</Text>
+                <TextInput
+                  placeholder="Password"
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  secureTextEntry
+                />
+              </View>
+              {errors.password && touched.password && (
+                <Text style={styles.errorText}>{errors.password}</Text>
+              )}
 
-  render () {
-    return (
-      <ScrollView style={styles.parent}>
-         <Text style={styles.header}>REGISTER</Text>
-         <View style={styles.viewGroupInput}>
-            <Form>
-            <View style={styles.viewInput}>
-               <Text style={styles.label}>Name</Text>
-               <TextInput placeholder='Name' />
-               {/* onChangeText={name => this.setState({ name })} */}
-            </View>
+              <TouchableOpacity
+                style={styles.link}
+                onPress={() => this.props.navigation.navigate('Login')}>
+                <Text style={styles.textLink}>Already have a account ?</Text>
+              </TouchableOpacity>
 
-            <View style={styles.viewInput}>
-               <Text style={styles.label}>Email</Text>
-               <TextInput placeholder='Email' />
-               {/* onChangeText={email => this.setState({ email })} */}
-            </View>
-
-            <View style={styles.viewInput}>
-               <Text style={styles.label}>Password</Text>
-               <TextInput placeholder='Password' secureTextEntry />
-               {/* onChangeText={password => this.setState({ password })} */}
-            </View>
-
-            <TouchableOpacity style={styles.link} onPress={() => this.props.navigation.navigate('Login')}>
-               <Text style={styles.textLink}>Already have a account ?</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.btn}>
-            {/* onPress={this.doRegister} */}
-               <Text style={styles.textBtn}>REGISTER</Text>
-            </TouchableOpacity>
-            </Form>
-         </View>
-      </ScrollView>
-    )
-  }
-}
+              <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
+                <Text style={styles.textBtn}>REGISTER</Text>
+              </TouchableOpacity>
+            </>
+          )}
+        </Formik>
+      </View>
+    </ScrollView>
+  );
+};
 
 const styles = StyleSheet.create({
   parent: {
     flex: 1,
-    padding: 10
+    padding: 10,
   },
   header: {
     fontSize: 60,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   viewGroupInput: {
     flex: 1,
     justifyContent: 'center',
-    marginBottom: 20
+    marginBottom: 20,
   },
   viewInput: {
     height: 75,
@@ -109,18 +144,18 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     padding: 5,
     justifyContent: 'center',
-    marginVertical: 20
+    marginVertical: 20,
   },
   label: {
     color: 'gray',
     fontWeight: 'bold',
-    fontSize: 12
+    fontSize: 12,
   },
   link: {
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
   },
   textLink: {
-    fontSize: 15
+    fontSize: 15,
   },
   btn: {
     marginVertical: 25,
@@ -129,20 +164,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 100,
-    backgroundColor: 'gray'
+    backgroundColor: 'gray',
   },
   textBtn: {
     fontSize: 18,
-    fontWeight: 'bold'
-  }
-})
+    fontWeight: 'bold',
+  },
+  errorText: {
+    fontSize: 10,
+    color: 'red',
+  },
+});
 
-// const mapStateToProps = state => ({
-//   registerState: state.register
-// })
-
-// const mapDispatchToProps = {
-//   goRegister: registerActions.register
-// }
-
-export default Register
+export default Register;

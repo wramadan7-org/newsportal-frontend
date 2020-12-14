@@ -59,7 +59,7 @@ class MyNews extends React.Component {
                      <View style={styles.viewImg}>
                         <Image source={{ uri: 'https://reactjs.org/logo-og.png' }} style={styles.imgNews} />
                         <View style={styles.actions}>
-                           <TouchableOpacity>
+                           <TouchableOpacity onPress={() => this.props.navigation.navigate('EditNews')}>
                               <Text style={styles.actionsEdit}>Edit</Text>
                            </TouchableOpacity>
                            <TouchableOpacity>
