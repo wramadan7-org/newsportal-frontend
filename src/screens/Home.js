@@ -7,252 +7,83 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
 
 // import actions
-import actionsHome from '../redux/actions/home';
-
+import actionNews from '../redux/actions/news';
 // import moment
 import momet from 'moment';
+// import default image
+import emptyImage from '../default-image/empty.jpg';
+// env
+import {APP_PORT} from '@env';
 
-const Home = () => {
+const Home = ({navigation}) => {
+  const dispatch = useDispatch();
+  const newsState = useSelector((state) => state.news);
+  React.useEffect(() => {
+    dispatch(actionNews.getNews());
+    // console.log(newsState.data.map((o) => o.User.name));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <ScrollView style={styles.parent}>
-      {/* <ScrollView> */}
-      {/* {data.length > 0 && data.map(o => ( */}
-
-      <TouchableOpacity
-        style={styles.cardNews}
-        onPress={() => this.props.navigation.navigate('Detail')}>
-        <View style={styles.viewNews}>
-          <View style={styles.viewTextNews}>
-            <Text style={styles.titleNews}>
-              JUDUL INI BRITAcewrrrrrrrrrrrr dddddddddddddddd SDSDSDDSDSD
-            </Text>
-            <Text style={styles.subtitle}>
-              Adasdadasdadasdasdasda sjsjsjsjsj sjsjsjs
-              jjjsdasdasdasdasdasdasdas
-            </Text>
-            <View style={styles.viewCreateAndDate}>
-              <View>
-                <Text style={styles.createdBy}>Wahyu Ramadan</Text>
+      {newsState.data &&
+        newsState.data.length &&
+        newsState.data.map((o) => (
+          <TouchableOpacity
+            key={o.id}
+            style={styles.cardNews}
+            onPress={() => navigation.navigate('Detail', o.id)}>
+            <View style={styles.viewNews}>
+              <View style={styles.viewTextNews}>
+                <Text style={styles.titleNews}>{o.title}</Text>
+                <Text style={styles.subtitle}>
+                  {o.news.length > 27
+                    ? o.news.slice(0, 27).concat(' ...')
+                    : o.title}
+                </Text>
+                <View style={styles.viewCreateAndDate}>
+                  <View>
+                    <Text style={styles.createdBy}>
+                      {o.User === null
+                        ? 'Unknow'
+                        : o.User.name
+                        ? o.User.name.split(' ').length > 2
+                          ? o.User.name
+                              .split(' ')[0]
+                              .concat(' ')
+                              .concat(o.User.name.split(' ')[1])
+                          : o.User.name
+                        : 'isi'}
+                    </Text>
+                  </View>
+                  <View>
+                    <Text style={styles.dot}> . </Text>
+                  </View>
+                  <View>
+                    <Text style={styles.dateCreate}>
+                      {Math.ceil(o.news.length / 60)} min read
+                    </Text>
+                    {/* <Text style={styles.dateCreate}>6 min read</Text> */}
+                  </View>
+                </View>
               </View>
-              <View>
-                <Text style={styles.dot}> . </Text>
-              </View>
-              <View>
-                <Text style={styles.dateCreate}>6 min read</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.viewImg}>
-            <Image
-              source={{uri: 'https://reactjs.org/logo-og.png'}}
-              style={styles.imgNews}
-            />
-          </View>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.cardNews}
-        onPress={() => this.props.navigation.navigate('Detail')}>
-        <View style={styles.viewNews}>
-          <View style={styles.viewTextNews}>
-            <Text style={styles.titleNews}>
-              JUDUL INI BRITAcewrrrrrrrrrrrr dddddddddddddddd SDSDSDDSDSD
-            </Text>
-            <Text style={styles.subtitle}>
-              Adasdadasdadasdasdasda sjsjsjsjsj sjsjsjs
-              jjjsdasdasdasdasdasdasdas
-            </Text>
-            <View style={styles.viewCreateAndDate}>
-              <View>
-                <Text style={styles.createdBy}>Wahyu Ramadan</Text>
-              </View>
-              <View>
-                <Text style={styles.dot}> . </Text>
-              </View>
-              <View>
-                <Text style={styles.dateCreate}>6 min read</Text>
+              <View style={styles.viewImg}>
+                <Image
+                  source={
+                    o.image === null
+                      ? emptyImage
+                      : {uri: `${APP_PORT}${o.image}`}
+                  }
+                  // source={{uri: 'https://reactjs.org/logo-og.png'}}
+                  style={styles.imgNews}
+                />
               </View>
             </View>
-          </View>
-          <View style={styles.viewImg}>
-            <Image
-              source={{uri: 'https://reactjs.org/logo-og.png'}}
-              style={styles.imgNews}
-            />
-          </View>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.cardNews}
-        onPress={() => this.props.navigation.navigate('Detail')}>
-        <View style={styles.viewNews}>
-          <View style={styles.viewTextNews}>
-            <Text style={styles.titleNews}>
-              JUDUL INI BRITAcewrrrrrrrrrrrr dddddddddddddddd SDSDSDDSDSD
-            </Text>
-            <Text style={styles.subtitle}>
-              Adasdadasdadasdasdasda sjsjsjsjsj sjsjsjs
-              jjjsdasdasdasdasdasdasdas
-            </Text>
-            <View style={styles.viewCreateAndDate}>
-              <View>
-                <Text style={styles.createdBy}>Wahyu Ramadan</Text>
-              </View>
-              <View>
-                <Text style={styles.dot}> . </Text>
-              </View>
-              <View>
-                <Text style={styles.dateCreate}>6 min read</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.viewImg}>
-            <Image
-              source={{uri: 'https://reactjs.org/logo-og.png'}}
-              style={styles.imgNews}
-            />
-          </View>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.cardNews}
-        onPress={() => this.props.navigation.navigate('Detail')}>
-        <View style={styles.viewNews}>
-          <View style={styles.viewTextNews}>
-            <Text style={styles.titleNews}>
-              JUDUL INI BRITAcewrrrrrrrrrrrr dddddddddddddddd SDSDSDDSDSD
-            </Text>
-            <Text style={styles.subtitle}>
-              Adasdadasdadasdasdasda sjsjsjsjsj sjsjsjs
-              jjjsdasdasdasdasdasdasdas
-            </Text>
-            <View style={styles.viewCreateAndDate}>
-              <View>
-                <Text style={styles.createdBy}>Wahyu Ramadan</Text>
-              </View>
-              <View>
-                <Text style={styles.dot}> . </Text>
-              </View>
-              <View>
-                <Text style={styles.dateCreate}>6 min read</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.viewImg}>
-            <Image
-              source={{uri: 'https://reactjs.org/logo-og.png'}}
-              style={styles.imgNews}
-            />
-          </View>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.cardNews}
-        onPress={() => this.props.navigation.navigate('Detail')}>
-        <View style={styles.viewNews}>
-          <View style={styles.viewTextNews}>
-            <Text style={styles.titleNews}>
-              JUDUL INI BRITAcewrrrrrrrrrrrr dddddddddddddddd SDSDSDDSDSD
-            </Text>
-            <Text style={styles.subtitle}>
-              Adasdadasdadasdasdasda sjsjsjsjsj sjsjsjs
-              jjjsdasdasdasdasdasdasdas
-            </Text>
-            <View style={styles.viewCreateAndDate}>
-              <View>
-                <Text style={styles.createdBy}>Wahyu Ramadan</Text>
-              </View>
-              <View>
-                <Text style={styles.dot}> . </Text>
-              </View>
-              <View>
-                <Text style={styles.dateCreate}>6 min read</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.viewImg}>
-            <Image
-              source={{uri: 'https://reactjs.org/logo-og.png'}}
-              style={styles.imgNews}
-            />
-          </View>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.cardNews}
-        onPress={() => this.props.navigation.navigate('Detail')}>
-        <View style={styles.viewNews}>
-          <View style={styles.viewTextNews}>
-            <Text style={styles.titleNews}>
-              JUDUL INI BRITAcewrrrrrrrrrrrr dddddddddddddddd SDSDSDDSDSD
-            </Text>
-            <Text style={styles.subtitle}>
-              Adasdadasdadasdasdasda sjsjsjsjsj sjsjsjs
-              jjjsdasdasdasdasdasdasdas
-            </Text>
-            <View style={styles.viewCreateAndDate}>
-              <View>
-                <Text style={styles.createdBy}>Wahyu Ramadan</Text>
-              </View>
-              <View>
-                <Text style={styles.dot}> . </Text>
-              </View>
-              <View>
-                <Text style={styles.dateCreate}>6 min read</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.viewImg}>
-            <Image
-              source={{uri: 'https://reactjs.org/logo-og.png'}}
-              style={styles.imgNews}
-            />
-          </View>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.cardNews}
-        onPress={() => this.props.navigation.navigate('Detail')}>
-        <View style={styles.viewNews}>
-          <View style={styles.viewTextNews}>
-            <Text style={styles.titleNews}>
-              JUDUL INI BRITAcewrrrrrrrrrrrr dddddddddddddddd SDSDSDDSDSD
-            </Text>
-            <Text style={styles.subtitle}>
-              Adasdadasdadasdasdasda sjsjsjsjsj sjsjsjs
-              jjjsdasdasdasdasdasdasdas
-            </Text>
-            <View style={styles.viewCreateAndDate}>
-              <View>
-                <Text style={styles.createdBy}>Wahyu Ramadan</Text>
-              </View>
-              <View>
-                <Text style={styles.dot}> . </Text>
-              </View>
-              <View>
-                <Text style={styles.dateCreate}>6 min read</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.viewImg}>
-            <Image
-              source={{uri: 'https://reactjs.org/logo-og.png'}}
-              style={styles.imgNews}
-            />
-          </View>
-        </View>
-      </TouchableOpacity>
-      {/* ))} */}
-
-      {/* </ScrollView> */}
+          </TouchableOpacity>
+        ))}
     </ScrollView>
   );
 };
@@ -268,12 +99,14 @@ const styles = StyleSheet.create({
   viewImg: {
     flex: 3,
     padding: 5,
+    justifyContent: 'center',
     //  borderWidth: 1
   },
   imgNews: {
     height: 120,
     borderRadius: 10,
     resizeMode: 'cover',
+    justifyContent: 'center',
   },
   cardNews: {
     // borderWidth: 1,
@@ -297,7 +130,7 @@ const styles = StyleSheet.create({
   },
   titleNews: {
     height: 50,
-    //  fontWeight: 'bold',
+    fontWeight: '800',
     fontSize: 20,
     color: 'black',
     fontFamily: 'times news roman',
@@ -305,9 +138,10 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     //  flex: 1,
-    height: 17,
-    fontSize: 12,
+    height: 19,
+    fontSize: 15,
     fontFamily: 'times news roman',
+    marginVertical: 10,
   },
   viewCreateAndDate: {
     flex: 1,
