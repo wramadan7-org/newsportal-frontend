@@ -1,8 +1,11 @@
 const initialState = {
-  data: [],
-  detail: [],
+  dataNews: [],
+  dataDetailNews: [],
+  dataMyNews: [],
+  dataUpdateNews: [],
+  dataCreateNews: [],
+  dataDeleteNews: [],
   isLoading: false,
-  //   isLogin: false,
   isError: false,
   alertMsg: '',
 };
@@ -29,9 +32,10 @@ export default (state = initialState, action) => {
         isLoading: false,
         isError: false,
         alertMsg: '',
-        data: action.payload.data.results,
+        dataNews: action.payload.data.results,
       };
     }
+    // detail
     case 'DETAIL_NEWS_PENDING': {
       return {
         ...state,
@@ -52,7 +56,107 @@ export default (state = initialState, action) => {
         isLoading: false,
         isError: false,
         alertMsg: '',
-        detail: action.payload.data.results,
+        dataDetailNews: action.payload.data.results,
+      };
+    }
+    // create
+    case 'CREATE_NEWS_PENDING': {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case 'CREATE_NEWS_REJECTED': {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        alertMsg: 'Request rejected',
+      };
+    }
+    case 'CREATE_NEWS_FULFILLED': {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        alertMsg: action.payload.data.message,
+        dataCreateNews: action.payload.data.results,
+        success: action.payload.data.success,
+      };
+    }
+    // my news
+    case 'GET_MY_NEWS_PENDING': {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case 'GET_MY_NEWS_REJECTED': {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        alertMsg: 'Request rejected',
+      };
+    }
+    case 'GET_MY_NEWS_FULFILLED': {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        alertMsg: action.payload.data.message,
+        dataMyNews: action.payload.data.results,
+        success: action.payload.data.success,
+      };
+    }
+    // update news
+    case 'UPDATE_NEWS_PENDING': {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case 'UPDATE_NEWS_REJECTED': {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        alertMsg: 'Request rejected',
+      };
+    }
+    case 'UPDATE_NEWS_FULFILLED': {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        alertMsg: action.payload.data.message,
+        dataUpdateNews: action.payload.data.results,
+        success: action.payload.data.success,
+      };
+    }
+    // delete news
+    case 'DELETE_NEWS_PENDING': {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case 'DELETE_NEWS_REJECTED': {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        alertMsg: 'Request rejected',
+      };
+    }
+    case 'DELETE_NEWS_FULFILLED': {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        alertMsg: action.payload.data.message,
+        dataDeleteNews: action.payload.data.results,
+        success: action.payload.data.success,
       };
     }
     default: {

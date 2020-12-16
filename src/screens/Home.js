@@ -23,15 +23,15 @@ const Home = ({navigation}) => {
   const newsState = useSelector((state) => state.news);
   React.useEffect(() => {
     dispatch(actionNews.getNews());
-    // console.log(newsState.data.map((o) => o.User.name));
+    // console.log(newsState.dataNews.map((o) => o.User.name));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <ScrollView style={styles.parent}>
-      {newsState.data &&
-        newsState.data.length &&
-        newsState.data.map((o) => (
+      {newsState.dataNews &&
+        newsState.dataNews.length &&
+        newsState.dataNews.map((o) => (
           <TouchableOpacity
             key={o.id}
             style={styles.cardNews}
