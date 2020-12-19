@@ -7,15 +7,18 @@ import {
   TextInput,
   ScrollView,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import * as yup from 'yup';
 import {Formik} from 'formik';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 // import actions
 import registerActions from '../redux/actions/auth';
 
 const Register = ({navigation}) => {
+  const registerState = useSelector((state) => state.register);
+
   const registerValidate = yup.object().shape({
     name: yup.string().required('Name is required'),
     email: yup
@@ -33,19 +36,28 @@ const Register = ({navigation}) => {
   const doRegister = async (values) => {
     const dispatchRegister = await dispatch(registerActions.register(values));
     if (dispatchRegister && dispatchRegister.action.payload.data.success) {
-      Alert.alert('Success', 'Register successfully', [
+      await Alert.alert('Success', 'Register successfully', [
         {
           text: 'OK',
           onPress: () => navigation.navigate('Login'),
         },
       ]);
     } else {
-      Alert.alert('Fail', 'Email already registerd');
+      await Alert.alert('Fail', 'Email already registerd');
     }
   };
 
   return (
     <ScrollView style={styles.parent}>
+      {registerState.isLoading && (
+        <View style={styles.viewIndicator}>
+          <ActivityIndicator
+            size="large"
+            color="blue"
+            style={styles.indicator}
+          />
+        </View>
+      )}
       <Text style={styles.header}>REGISTER</Text>
       <View style={styles.viewGroupInput}>
         <Formik
@@ -106,11 +118,14 @@ const Register = ({navigation}) => {
 
               <TouchableOpacity
                 style={styles.link}
-                onPress={() => this.props.navigation.navigate('Login')}>
+                onPress={() => navigation.navigate('Login')}>
                 <Text style={styles.textLink}>Already have a account ?</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
+              <TouchableOpacity
+                style={styles.btn}
+                onPress={handleSubmit}
+                disabled={!isValid}>
                 <Text style={styles.textBtn}>REGISTER</Text>
               </TouchableOpacity>
             </>
@@ -173,6 +188,19 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 10,
     color: 'red',
+  },
+  viewIndicator: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    // borderWidth: 1,
+    height: '100%',
+  },
+  indicator: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
   },
 });
 

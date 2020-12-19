@@ -6,64 +6,89 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
+  Alert,
+  ActivityIndicator,
 } from 'react-native';
 // import { Header, Item } from 'native-base'
 import authActions from '../redux/actions/auth';
 import profileActions from '../redux/actions/personal';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+// import empty image
+import emptyImage from '../default-image/empty.jpg';
+// import env
+import {APP_PORT} from '@env';
 
 const Profile = () => {
   const dispatch = useDispatch();
+  const {token} = useSelector((state) => state.auth);
+  const profileState = useSelector((state) => state.personal);
 
   const logout = () => {
     console.log('PRESS');
     dispatch(authActions.logout());
   };
+
+  React.useEffect(() => {
+    dispatch(profileActions.getPersonal(token));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
+
   return (
     <ScrollView style={styles.parent}>
-      {/* <Header searchBar rounded>
-            <Item>
-               <TouchableOpacity>
-                  <Text>Search</Text>
-               </TouchableOpacity>
-            </Item>
-         </Header> */}
-      {/* {!isLoading && !isError && data && data.map(o => ( */}
-      <View style={styles.body}>
-        <View style={styles.viewPhoto}>
-          <Image
-            style={styles.photoProfile}
-            source={{uri: 'https://reactjs.org/logo-og.png'}}
+      {profileState.isLoading && (
+        <View style={styles.viewIndicator}>
+          <ActivityIndicator
+            size="large"
+            color="blue"
+            style={styles.indicator}
           />
-          <View>
-            <Text style={styles.textNameProfile}>Wahyu Ramadan</Text>
-          </View>
         </View>
-        <View style={styles.viewDesc}>
-          <View style={styles.descTop}>
-            <View style={styles.viewName}>
-              <Text style={styles.title}>Name</Text>
-              <Text style={styles.desc}>Wahyu Ramadan</Text>
-            </View>
+      )}
+      {profileState.dataPersonal &&
+        profileState.dataPersonal.map((o) => (
+          <>
+            <View style={styles.body} key={o.id}>
+              <View style={styles.viewPhoto}>
+                <Image
+                  style={styles.photoProfile}
+                  source={
+                    o.photo !== null
+                      ? o.photo.length > 0
+                        ? {uri: `${APP_PORT}${o.photo}`}
+                        : emptyImage
+                      : emptyImage
+                  }
+                />
+                <View>
+                  <Text style={styles.textNameProfile}>{o.name}</Text>
+                </View>
+              </View>
+              <View style={styles.viewDesc}>
+                <View style={styles.descTop}>
+                  <View style={styles.viewName}>
+                    <Text style={styles.title}>Name</Text>
+                    <Text style={styles.desc}>{o.name}</Text>
+                  </View>
 
-            <View style={styles.viewDate}>
-              <Text style={styles.title}>Date</Text>
-              <Text style={styles.desc}>2000-12-12</Text>
-            </View>
-          </View>
-          <View style={styles.viewEmail}>
-            <Text style={styles.title}>Email</Text>
-            <Text style={styles.desc}>wramadan1203@gmail</Text>
-          </View>
+                  <View style={styles.viewDate}>
+                    <Text style={styles.title}>Date</Text>
+                    <Text style={styles.desc}>{o.birthdate}</Text>
+                  </View>
+                </View>
+                <View style={styles.viewEmail}>
+                  <Text style={styles.title}>Email</Text>
+                  <Text style={styles.desc}>{o.email}</Text>
+                </View>
 
-          <View style={styles.logout}>
-            <TouchableOpacity onPress={logout}>
-              <Text>LOGOUT</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-      {/* ))} */}
+                <View style={styles.logout}>
+                  <TouchableOpacity style={styles.btn} onPress={logout}>
+                    <Text style={styles.txtBtn}>LOGOUT</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </>
+        ))}
     </ScrollView>
   );
 };
@@ -138,9 +163,36 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logout: {
+    width: '100%',
     marginVertical: 20,
     alignSelf: 'center',
     alignItems: 'center',
+  },
+  btn: {
+    height: 50,
+    width: '100%',
+    backgroundColor: 'grey',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 100,
+  },
+  txtBtn: {
+    color: 'white',
+    fontWeight: '900',
+    fontSize: 16,
+  },
+  viewIndicator: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    // borderWidth: 1,
+    height: '100%',
+  },
+  indicator: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
   },
 });
 

@@ -15,13 +15,22 @@ import Category from './Category';
 import EditProfile from './EditProfile';
 import Detail from './DetailNews';
 import EditNews from './EditNews';
+import MyNews from './MyNews';
+import ChangePassword from './ChangePassword';
 
 import Drawer from './Drawer';
+// splashScreen
+import SplashScreen from 'react-native-splash-screen';
 
 const Stack = createStackNavigator();
 
 const Main = () => {
   const authState = useSelector((state) => state.auth);
+
+  React.useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+
   return (
     <NavigationContainer>
       {!authState.success ? (
@@ -77,6 +86,20 @@ const Main = () => {
             component={EditNews}
             options={{
               title: 'Edit News',
+            }}
+          />
+          <Stack.Screen
+            name="MyNews"
+            component={MyNews}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="ChangePassword"
+            component={ChangePassword}
+            options={{
+              title: 'Change Password',
             }}
           />
         </Stack.Navigator>

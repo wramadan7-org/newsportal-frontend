@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
 // import header
@@ -11,8 +11,7 @@ import Profile from './Profile';
 import CreateNews from './CreateNews';
 import MyNews from './MyNews';
 import EditNews from './EditNews';
-
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import CustomDrawer from '../component/CustomDrawer';
 
 const Draw = createDrawerNavigator();
 
@@ -24,21 +23,14 @@ const Drawer = ({navigation}) => {
         activeTintColor: 'grey',
         itemStyle: {marginVertical: 5},
       }}
-      // drawerContent={() => <Text>HOLAAA</Text>}
+      // drawerContent={() => <CustomDrawer home={Home} profile={Profile} />}
     >
-      <Draw.Screen
-        name="Home"
-        component={Home}
-        options={{
-          drawerLabel: 'Home',
-          headerRight: () => <Header />,
-        }}
-      />
       <Draw.Screen
         name="Profile"
         component={Profile}
         options={{
-          drawerLabel: 'Profile',
+          drawerLabel: () => <CustomDrawer />,
+          // headerStyle: {backgroundColor: 'grey'},
           //   headerShown: false,
           headerRight: () => (
             <TouchableOpacity
@@ -47,6 +39,16 @@ const Drawer = ({navigation}) => {
               <Text style={{fontSize: 20}}>Edit</Text>
             </TouchableOpacity>
           ),
+        }}
+      />
+      <Draw.Screen
+        name="Home"
+        component={Home}
+        options={{
+          drawerLabel: 'Home',
+          // title: () => ()
+          headerTitle: () => <Header />,
+          // headerRight: () => <Header />,
         }}
       />
       <Draw.Screen

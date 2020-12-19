@@ -1,29 +1,39 @@
-import React from 'react'
-import { View, TouchableOpacity, Text, StyleSheet, ScrollView } from 'react-native'
+import React from 'react';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
 
-function Landpage ({ navigation }) {
+function Landpage({navigation}) {
   return (
-      <ScrollView style={styles.parent}>
-         <View style={styles.body}>
-            <View style={styles.viewLogo}>
-               <Text style={styles.logo}>R</Text>
-            </View>
-            <View style={styles.viewGroupBtn}>
-               <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Login')}>
-                  <Text style={styles.textBtn}>LOGIN</Text>
-               </TouchableOpacity>
-               <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Register')}>
-                  <Text style={styles.textBtn}>REGISTER</Text>
-               </TouchableOpacity>
-            </View>
-         </View>
-      </ScrollView>
-  )
+    <ScrollView style={styles.parent}>
+      <View style={styles.body}>
+        <View style={styles.viewLogo}>
+          <Text style={styles.logo}>R</Text>
+        </View>
+        <View style={styles.viewGroupBtn}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => navigation.navigate('Login')}>
+            <Text style={styles.textBtn}>LOGIN</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => navigation.navigate('Register')}>
+            <Text style={styles.textBtn}>REGISTER</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ScrollView>
+  );
 }
 
 const styles = StyleSheet.create({
   parent: {
-    flex: 1
+    flex: 1,
   },
   body: {
     flex: 1,
@@ -31,7 +41,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 50
+    marginTop: 50,
     //  borderWidth: 1
   },
   viewLogo: {
@@ -42,16 +52,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 200,
     height: 200,
-    marginBottom: 70
+    marginBottom: 70,
   },
   logo: {
     fontWeight: 'bold',
     fontSize: 190,
-    color: 'white'
+    color: 'white',
   },
   viewGroupBtn: {
     //  borderWidth: 1,
-    width: '100%'
+    width: '100%',
   },
   btn: {
     marginVertical: 25,
@@ -60,12 +70,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 100,
-    backgroundColor: 'gray'
+    backgroundColor: 'gray',
   },
   textBtn: {
     fontSize: 18,
-    fontWeight: 'bold'
-  }
-})
+    fontWeight: 'bold',
+  },
+});
 
-export default Landpage
+export default Landpage;

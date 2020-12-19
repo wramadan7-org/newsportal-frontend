@@ -8,6 +8,7 @@ const initialState = {
   isLoading: false,
   isError: false,
   alertMsg: '',
+  success: false,
 };
 
 export default (state = initialState, action) => {
@@ -157,6 +158,30 @@ export default (state = initialState, action) => {
         alertMsg: action.payload.data.message,
         dataDeleteNews: action.payload.data.results,
         success: action.payload.data.success,
+      };
+    }
+    // clear detail
+    case 'CLEAR_DETAIL_NEWS_PENDING': {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case 'CLEAR_DETAIL_NEWS_REJECTED': {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        alertMsg: 'Request rejected',
+      };
+    }
+    case 'CLEAR_DETAIL_NEWS_FULFILLED': {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        alertMsg: '',
+        dataDetailNews: [],
       };
     }
     default: {

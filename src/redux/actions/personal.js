@@ -10,4 +10,15 @@ export default {
     type: 'UPDATE_PERSONAL',
     payload: http(token).patch('/users/personal', qs.stringify(data)),
   }),
+  updatePersonalFormData: (token, data) => ({
+    type: 'UPDATE_PERSONAL',
+    payload: http(token).patch('/users/personal', data),
+  }),
+  changePassword: (token, data) => ({
+    type: 'CHANGE_PASSWORD',
+    payload: http(token).patch(
+      '/users/personal/changePassword',
+      qs.stringify(data),
+    ),
+  }),
 };

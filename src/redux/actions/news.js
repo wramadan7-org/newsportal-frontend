@@ -2,13 +2,13 @@ import http from '../../helpers/http';
 import qs from 'querystring';
 
 export default {
-  getNews: () => ({
+  getNews: (token) => ({
     type: 'GET_NEWS',
-    payload: http().get('news'),
+    payload: http(token).get('news'),
   }),
-  detailNews: (id) => ({
+  detailNews: (token, id) => ({
     type: 'DETAIL_NEWS',
-    payload: http().get(`news/${id}`),
+    payload: http(token).get(`news/${id}`),
   }),
   getMyNews: (token) => ({
     type: 'GET_MY_NEWS',
@@ -33,5 +33,9 @@ export default {
   deleteNews: (token, id) => ({
     type: 'DELETE_NEWS',
     payload: http(token).delete(`news/${id}`),
+  }),
+  clearDetailNews: (token) => ({
+    type: 'CLEAR_DETAIL_NEWS',
+    payload: http(token),
   }),
 };

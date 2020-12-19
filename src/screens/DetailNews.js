@@ -1,5 +1,12 @@
 import React from 'react';
-import {View, Text, ScrollView, StyleSheet, Image} from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  Image,
+  ActivityIndicator,
+} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 
 // import actions
@@ -14,16 +21,27 @@ import moment from 'moment';
 const DetailNews = ({route, navigation}) => {
   const dispatch = useDispatch();
   const detailState = useSelector((state) => state.news);
+  const {token} = useSelector((state) => state.auth);
   // console.log(route.params);
 
   React.useEffect(() => {
-    dispatch(actionsNews.detailNews(route.params));
+    dispatch(actionsNews.detailNews(token, route.params));
+    console.log(detailState.dataDetailNews);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [route.params]);
 
   return (
     <View style={styles.parent}>
       <ScrollView>
+        {detailState.isLoading && (
+          <View style={styles.viewIndicator}>
+            <ActivityIndicator
+              size="large"
+              color="blue"
+              style={styles.indicator}
+            />
+          </View>
+        )}
         {detailState.dataDetailNews &&
           detailState.dataDetailNews !== undefined && (
             <>
@@ -42,11 +60,13 @@ const DetailNews = ({route, navigation}) => {
                   <Image
                     style={styles.image}
                     source={
-                      detailState.dataDetailNews.image === null
+                      detailState.dataDetailNews?.image === null
                         ? emptyImage
-                        : {
-                            uri: `${APP_PORT}${detailState.dataDetailNews.image}`,
+                        : detailState.dataDetailNews.image?.length
+                        ? {
+                            uri: `${APP_PORT}${detailState.dataDetailNews?.image}`,
                           }
+                        : emptyImage
                     }
                   />
                 </View>
@@ -55,32 +75,31 @@ const DetailNews = ({route, navigation}) => {
                     <Image
                       style={styles.photo}
                       source={
-                        detailState.dataDetailNews.User === null
+                        detailState.dataDetailNews?.User === null
                           ? emptyImage
-                          : detailState.dataDetailNews.User.photo === null ||
-                            detailState.dataDetailNews.User.photo.length <= 0
-                          ? emptyImage
-                          : {
+                          : detailState.dataDetailNews.User?.photo
+                          ? {
                               uri: `${APP_PORT}${detailState.dataDetailNews.User.photo}`,
                             }
+                          : emptyImage
                       }
                     />
                   </View>
                   <Text style={styles.writer}>
-                    {detailState.dataDetailNews.User !== null
-                      ? detailState.dataDetailNews.User.name
-                        ? detailState.dataDetailNews.User.name.split(' ')
+                    {detailState.dataDetailNews?.User !== null
+                      ? detailState.dataDetailNews.User?.name
+                        ? detailState.dataDetailNews.User?.name.split(' ')
                             .length > 2
-                          ? detailState.dataDetailNews.User.name
+                          ? detailState.dataDetailNews.User?.name
                               .split(' ')[0]
                               .concat(' ')
                               .concat(
-                                detailState.dataDetailNews.User.name.split(
+                                detailState.dataDetailNews.User?.name.split(
                                   ' ',
                                 )[1],
                               )
-                          : detailState.dataDetailNews.User.name
-                        : detailState.dataDetailNews.User.name
+                          : detailState.dataDetailNews.User?.name
+                        : detailState.dataDetailNews.User?.name
                       : 'Unknow'}
                   </Text>
                   <Text style={styles.created}>
@@ -88,8 +107,8 @@ const DetailNews = ({route, navigation}) => {
                   </Text>
                   <Text> . </Text>
                   <Text style={styles.reading}>
-                    {Math.ceil(detailState.dataDetailNews.news.length / 60)} min
-                    read
+                    {Math.ceil(detailState.dataDetailNews.news?.length / 60)}{' '}
+                    min read
                   </Text>
                 </View>
                 <View style={styles.viewNews}>
@@ -172,6 +191,19 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     resizeMode: 'cover',
     justifyContent: 'center',
+  },
+  viewIndicator: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    // borderWidth: 1,
+    height: '100%',
+  },
+  indicator: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
   },
 });
 

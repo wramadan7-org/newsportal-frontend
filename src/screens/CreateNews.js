@@ -28,14 +28,14 @@ const CreateNews = ({navigation}) => {
 
   const chooseImage = () => {
     let options = {
-      title: 'Select Avatar',
-      cameraType: 'front',
       mediaType: 'photo',
+      noData: true,
       storageOptions: {
         skipBackup: true,
         path: 'images',
       },
     };
+
     ImagePicker.showImagePicker(options, (response) => {
       console.log('Response = ', response);
 
@@ -83,12 +83,13 @@ const CreateNews = ({navigation}) => {
       const created = await dispatch(newsActions.createNews(token, values));
       await dispatch(newsActions.getNews());
       if (created && created.action.payload.data.success) {
-        Alert.alert('Success', 'News has been added', [
+        await Alert.alert('Success', 'News has been added', [
           {
             text: 'OK',
-            onPress: () => navigation.navigate('Home'),
+            onPress: () => navigation.navigate('MyNews'),
           },
         ]);
+        await setAvatar(null);
       } else {
         Alert.alert('Fail', 'Fail to add news');
       }
@@ -103,12 +104,13 @@ const CreateNews = ({navigation}) => {
       );
       await dispatch(newsActions.getNews());
       if (created && created.action.payload.data.success) {
-        Alert.alert('Success', 'News has been added', [
+        await Alert.alert('Success', 'News has been added', [
           {
             text: 'OK',
-            onPress: () => navigation.navigate('Home'),
+            onPress: () => navigation.navigate('MyNews'),
           },
         ]);
+        await setAvatar(null);
       } else {
         Alert.alert('Fail', 'Fail to add news');
       }
@@ -148,6 +150,7 @@ const CreateNews = ({navigation}) => {
                   onChangeText={handleChange('title')}
                   onBlur={handleBlur('title')}
                   placeholder="Enter title"
+                  value={values.title}
                 />
               </View>
               {errors.title && touched.title && (
@@ -160,6 +163,7 @@ const CreateNews = ({navigation}) => {
                   onChangeText={handleChange('news')}
                   onBlur={handleBlur('news')}
                   placeholder="Enter your news"
+                  value={values.news}
                   multiline={true}
                 />
               </View>
@@ -173,6 +177,7 @@ const CreateNews = ({navigation}) => {
                   onChangeText={handleChange('category')}
                   onBlur={handleBlur('category')}
                   placeholder="Enter category"
+                  value={values.category}
                 />
               </View>
               {errors.category && touched.category && (

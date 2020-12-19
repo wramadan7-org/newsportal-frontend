@@ -7,6 +7,7 @@ import {
   TextInput,
   ScrollView,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import * as yup from 'yup';
 import {Formik} from 'formik';
@@ -15,7 +16,9 @@ import {useDispatch, useSelector} from 'react-redux';
 // import action
 import loginActions from '../redux/actions/auth';
 
-const Login = () => {
+const Login = ({navigation}) => {
+  const loginState = useSelector((state) => state.auth);
+
   const loginValidation = yup.object().shape({
     email: yup
       .string()
@@ -32,14 +35,23 @@ const Login = () => {
   const doLogin = async (values) => {
     const actionLogin = await dispatch(loginActions.login(values));
     if (actionLogin && actionLogin.action.payload.data.success) {
-      Alert.alert('Success', 'Login successfully');
+      await Alert.alert('Success', 'Login successfully');
     } else {
-      Alert.alert('Fail', 'Email or password invalid');
+      await Alert.alert('Fail', 'Email or password invalid');
     }
   };
 
   return (
     <ScrollView style={styles.parent}>
+      {loginState.isLoading && (
+        <View style={styles.viewIndicator}>
+          <ActivityIndicator
+            size="large"
+            color="blue"
+            style={styles.indicator}
+          />
+        </View>
+      )}
       <Text style={styles.header}>LOGIN</Text>
       <View style={styles.viewGroupInput}>
         <Formik
@@ -155,6 +167,19 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 10,
     color: 'red',
+  },
+  viewIndicator: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    // borderWidth: 1,
+    height: '100%',
+  },
+  indicator: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
   },
 });
 
