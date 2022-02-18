@@ -21,7 +21,8 @@ import searchActions from '../redux/actions/search';
 // import default image
 import emptyImage from '../default-image/empty.jpg';
 // env
-import {APP_PORT} from '@env';
+// import {APP_PORT} from '@env';
+const APP_PORT = 'http://192.168.1.39:8080';
 // focus
 import {useIsFocused} from '@react-navigation/native';
 
@@ -61,7 +62,7 @@ const Item = ({id, title, news, category, user, image, onPress}) => (
         </View>
         <View style={styles.viewImg}>
           <Image
-            source={image === null ? emptyImage : {uri: `${APP_PORT}${image}`}}
+            source={image === null ? emptyImage : {uri: `${APP_PORT}/${image}`}}
             style={styles.imgNews}
           />
         </View>

@@ -14,7 +14,8 @@ import actionsNews from '../redux/actions/news';
 // import default image
 import emptyImage from '../default-image/empty.jpg';
 // env
-import {APP_PORT} from '@env';
+// import {APP_PORT} from '@env';
+const APP_PORT = 'http://192.168.1.39:8080';
 // moment
 import moment from 'moment';
 
@@ -64,7 +65,7 @@ const DetailNews = ({route, navigation}) => {
                         ? emptyImage
                         : detailState.dataDetailNews.image?.length
                         ? {
-                            uri: `${APP_PORT}${detailState.dataDetailNews?.image}`,
+                            uri: `${APP_PORT}/${detailState.dataDetailNews?.image}`,
                           }
                         : emptyImage
                     }
@@ -79,7 +80,7 @@ const DetailNews = ({route, navigation}) => {
                           ? emptyImage
                           : detailState.dataDetailNews.User?.photo
                           ? {
-                              uri: `${APP_PORT}${detailState.dataDetailNews.User.photo}`,
+                              uri: `${APP_PORT}/${detailState.dataDetailNews.User.photo}`,
                             }
                           : emptyImage
                       }

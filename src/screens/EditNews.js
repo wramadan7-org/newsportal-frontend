@@ -22,7 +22,8 @@ import newsActions from '../redux/actions/news';
 // import empty Image
 import emptyImage from '../default-image/empty.jpg';
 // import env
-import {APP_PORT} from '@env';
+// import {APP_PORT} from '@env';
+const APP_PORT = 'http://192.168.1.39:8080';
 // focus
 import {useIsFocused} from '@react-navigation/native';
 
@@ -236,7 +237,7 @@ const EditNews = ({route, navigation}) => {
                           ? newsState.dataDetailNews.image === null
                             ? emptyImage
                             : {
-                                uri: `${APP_PORT}${newsState.dataDetailNews.image}`,
+                                uri: `${APP_PORT}/${newsState.dataDetailNews.image}`,
                               }
                           : {uri: avatar}
                       }

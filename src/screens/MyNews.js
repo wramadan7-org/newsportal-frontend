@@ -17,7 +17,8 @@ import newsActions from '../redux/actions/news';
 // import redux
 import {useSelector, useDispatch} from 'react-redux';
 // env
-import {APP_PORT} from '@env';
+// import {APP_PORT} from '@env';
+const APP_PORT = 'http://192.168.1.39:8080';
 // emptyImage
 import emptyImage from '../default-image/empty.jpg';
 
@@ -68,7 +69,7 @@ const Item = ({
       </View>
       <View style={styles.viewImg}>
         <Image
-          source={image === null ? emptyImage : {uri: `${APP_PORT}${image}`}}
+          source={image === null ? emptyImage : {uri: `${APP_PORT}/${image}`}}
           style={styles.imgNews}
         />
       </View>

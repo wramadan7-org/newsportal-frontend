@@ -16,7 +16,8 @@ import {useDispatch, useSelector} from 'react-redux';
 // import empty image
 import emptyImage from '../default-image/empty.jpg';
 // import env
-import {APP_PORT} from '@env';
+// import {APP_PORT} from '@env';
+const APP_PORT = 'http://192.168.1.39:8080';
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -54,7 +55,7 @@ const Profile = () => {
                   source={
                     o.photo !== null
                       ? o.photo.length > 0
-                        ? {uri: `${APP_PORT}${o.photo}`}
+                        ? {uri: `${APP_PORT}/${o.photo}`}
                         : emptyImage
                       : emptyImage
                   }

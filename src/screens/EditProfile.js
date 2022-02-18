@@ -17,7 +17,8 @@ import profileActions from '../redux/actions/personal';
 // import imagepicker
 import ImagePicker from 'react-native-image-picker';
 // import env
-import {APP_PORT} from '@env';
+// import {APP_PORT} from '@env';
+const APP_PORT = 'http://192.168.1.39:8080';
 // import Formik and yup
 import {Formik} from 'formik';
 import * as yup from 'yup';
@@ -155,7 +156,7 @@ const EditProfile = ({navigation}) => {
                         ? profileState.dataPersonal[0].photo === null
                           ? emptyImage
                           : {
-                              uri: `${APP_PORT}${profileState.dataPersonal[0].photo}`,
+                              uri: `${APP_PORT}/${profileState.dataPersonal[0].photo}`,
                             }
                         : {uri: avatar}
                     }

@@ -3,7 +3,8 @@ import {View, Text, SafeAreaView, StyleSheet, Image} from 'react-native';
 // import react-redux
 import {useSelector, useDispatch} from 'react-redux';
 // import env
-import {APP_PORT} from '@env';
+// import {APP_PORT} from '@env';
+const APP_PORT = 'http://192.168.1.39:8080';
 // import empty image
 import emptyImage from '../default-image/empty.jpg';
 // profile action
@@ -27,7 +28,7 @@ export default function CustomDrawer() {
           source={
             profileState.dataPersonal[0]?.photo === null
               ? emptyImage
-              : {uri: `${APP_PORT}${profileState.dataPersonal[0]?.photo}`}
+              : {uri: `${APP_PORT}/${profileState.dataPersonal[0]?.photo}`}
           }
         />
       </View>
