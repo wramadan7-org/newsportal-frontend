@@ -1,7 +1,7 @@
 import {default as axios} from 'axios';
 
 // import {APP_PORT, APP_KEY} from '@env';
-const APP_PORT = 'http://192.168.1.39:8080';
+import APP_PORT from '../consta/config';
 console.log('awppawpaw', APP_PORT);
 
 const http = (token = null) => {

@@ -18,7 +18,7 @@ import newsActions from '../redux/actions/news';
 import {useSelector, useDispatch} from 'react-redux';
 // env
 // import {APP_PORT} from '@env';
-const APP_PORT = 'http://192.168.1.39:8080';
+import APP_PORT from '../consta/config';
 // emptyImage
 import emptyImage from '../default-image/empty.jpg';
 

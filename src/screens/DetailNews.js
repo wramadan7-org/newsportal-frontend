@@ -15,7 +15,7 @@ import actionsNews from '../redux/actions/news';
 import emptyImage from '../default-image/empty.jpg';
 // env
 // import {APP_PORT} from '@env';
-const APP_PORT = 'http://192.168.1.39:8080';
+import APP_PORT from '../consta/config';
 // moment
 import moment from 'moment';
 

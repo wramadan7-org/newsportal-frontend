@@ -4,7 +4,7 @@ import {View, Text, SafeAreaView, StyleSheet, Image} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 // import env
 // import {APP_PORT} from '@env';
-const APP_PORT = 'http://192.168.1.39:8080';
+import APP_PORT from '../consta/config';
 // import empty image
 import emptyImage from '../default-image/empty.jpg';
 // profile action

@@ -18,7 +18,7 @@ import profileActions from '../redux/actions/personal';
 import ImagePicker from 'react-native-image-picker';
 // import env
 // import {APP_PORT} from '@env';
-const APP_PORT = 'http://192.168.1.39:8080';
+import APP_PORT from '../consta/config';
 // import Formik and yup
 import {Formik} from 'formik';
 import * as yup from 'yup';
